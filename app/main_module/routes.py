@@ -19,7 +19,7 @@ def download_files():
     api_key = request.form.get('key')
     questions = api_consumer.get_questions(base_id, api_key)
 
-    if not questions['success']:
+    if not questions['success'] or len(questions['content']) == 0:
         code = questions['code']
         reason = questions['content']
         return jsonify(reason), code

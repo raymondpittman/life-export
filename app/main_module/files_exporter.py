@@ -16,7 +16,11 @@ class FileExporter(metaclass=abc.ABCMeta):
         grouped_questions = {}
 
         for question in self.questions:
-            chapter = question['fields']['chapter']
+
+            if 'chapter' in question['fields'].keys():
+                chapter = question['fields']['chapter']
+            elif 'chap' in question['fields'].keys():
+                chapter = question['fields']['chap']
 
             if type(chapter) == list and len(chapter) > 0:
                 chapter = chapter[0]
@@ -125,7 +129,7 @@ class ThinkificExporter(FileExporter):
 class iSpringExporter(FileExporter):
 
     EXCEL_COLUMNS = (
-        'QuestionType', 'QuestionText', 'Image', 'Video', 'Audio',
+        'QuestionType', 'QuestionText',
         'Answer1', 'Answer2', 'Answer3', 'Answer4', 'Answer5',
         'Answer6', 'Answer7', 'Answer8', 'Answer9', 'Answer10',
         'CorrectFeedBack', 'IncorrectFeedBack', 'Points'

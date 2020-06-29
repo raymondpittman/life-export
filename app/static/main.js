@@ -21,6 +21,10 @@ function successResponse(response) {
 
     var file_list_group = $('.file-list-group');
 
+    if (response.length == 0) {
+        $(file_list_group).html(`<div class="card"> <div class="card-body"> No rows. </div> </div>`)
+    }
+
     for (document_type in response) {
         var documents = response[document_type];
         var list_group = $(
